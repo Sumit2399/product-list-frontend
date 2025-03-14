@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import API_URL from "../config";
+import "../styles.css"; // Import global styles
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -14,14 +15,17 @@ const ProductList = () => {
   return (
     <div>
       <h2>Product List</h2>
-      <ul>
+      <div className="product-container">
         {products.map(product => (
-          <li key={product.id}>
-            <strong>{product.name}</strong> - ${product.price}  
+          <div key={product.id} className="product-card">
+            {product.imageUrl && <img src={product.imageUrl} alt={product.name} />}
+            <h3>{product.name}</h3>
             <p>{product.description}</p>
-          </li>
+            <p><strong>Price:</strong> ${product.price}</p>
+            <p><strong>Category:</strong> {product.category}</p>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
